@@ -1,4 +1,3 @@
-from colorama import Cursor
 from flask import jsonify
 from conexao import get_conexao
 from psycopg2.extras import RealDictCursor
