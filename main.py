@@ -1,5 +1,5 @@
-from flask import Flask
-from tarefa import buscar_tarefas, buscar_tarefa
+from flask import Flask, request
+from tarefa import buscar_tarefas, buscar_tarefa, criar_tarefa
 
 app = Flask(__name__)
 
@@ -19,5 +19,17 @@ def get_tarefa(todo_id):
     tarefa = buscar_tarefa(todo_id)
     return tarefa
 
+@app.route('/api/tarefas', methods=['POST'])
+def create_tarefa():
+    corpo = request.get_json()
+    tarefa_name = corpo.get('name')
+    tarefa_description = corpo.get('description')
+
+    criar_tarefa(tarefa_name, tarefa_description)
+    return {
+        'message': 'Tarefa cadastrada'
+    }
+
 if __name__ == '__main__':
     app.run(debug=True)
+
