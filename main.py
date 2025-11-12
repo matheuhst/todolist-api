@@ -37,6 +37,18 @@ def delete_tarefa(tarefa_id):
         'message': 'Tarefa apagada com sucesso'
     }
 
+@app.route('/api/tarefas/<int:tarefa_id>', methods=['PUT'])
+def uptade_tarefa(tarefa_id):
+    corpo = request.get_json()
+    tarefa_name = corpo.get('name')
+    tarefa_description = corpo.get('description')
+    
+    atualizar_tarefa(tarefa_id, tarefa_name, tarefa_description)
+
+    return {
+        'message': 'Tarefa atualizada com sucesso'
+    }
+
 if __name__ == '__main__':
     app.run(debug=True)
 
